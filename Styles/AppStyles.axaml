@@ -1,0 +1,66 @@
+<!-- COMMIT 2 — 23. 5. | git add Styles/AppStyles.axaml | git commit -m "feat: AppStyles – globální styly, tlačítka a karty" -->
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Card-like panels -->
+  <Style Selector="Border.card">
+    <Setter Property="Background" Value="White"/>
+    <Setter Property="CornerRadius" Value="10"/>
+    <Setter Property="Padding" Value="16"/>
+    <Setter Property="BoxShadow" Value="0 2 8 0 #22000000"/>
+    <Setter Property="Margin" Value="6"/>
+  </Style>
+
+  <!-- Primary button -->
+  <Style Selector="Button.primary">
+    <Setter Property="Background" Value="#4F8EF7"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="Padding" Value="12,8"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Cursor" Value="Hand"/>
+  </Style>
+  <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="#2563EB"/>
+  </Style>
+
+  <!-- Danger button -->
+  <Style Selector="Button.danger">
+    <Setter Property="Background" Value="#EF4444"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="Padding" Value="12,8"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Cursor" Value="Hand"/>
+  </Style>
+
+  <!-- Success button -->
+  <Style Selector="Button.success">
+    <Setter Property="Background" Value="#22C55E"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="Padding" Value="12,8"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Cursor" Value="Hand"/>
+  </Style>
+
+  <!-- Section header -->
+  <Style Selector="TextBlock.sectionHeader">
+    <Setter Property="FontSize" Value="16"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="Foreground" Value="#1E293B"/>
+    <Setter Property="Margin" Value="0,0,0,8"/>
+  </Style>
+
+  <!-- Income label -->
+  <Style Selector="TextBlock.income">
+    <Setter Property="Foreground" Value="#16A34A"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+  </Style>
+
+  <!-- Expense label -->
+  <Style Selector="TextBlock.expense">
+    <Setter Property="Foreground" Value="#DC2626"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+  </Style>
+</Styles>

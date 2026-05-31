@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="FinanceManager.Views.AddTransactionWindow"
+        Title="Přidat transakci"
+        Width="440" Height="400"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Background="#F1F5F9">
+
+  <Border Margin="20" Classes="card">
+    <StackPanel Spacing="14">
+
+      <TextBlock Text="Nová transakce" FontSize="20" FontWeight="Bold" Foreground="#1E293B"/>
+
+      <!-- Type -->
+      <StackPanel Spacing="4">
+        <TextBlock Text="Typ *" Foreground="#475569" FontSize="13"/>
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <RadioButton x:Name="IncomeRadio" Content="💚 Příjem" IsChecked="True" GroupName="Type"/>
+          <RadioButton x:Name="ExpenseRadio" Content="🔴 Výdaj" GroupName="Type"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Amount -->
+      <StackPanel Spacing="4">
+        <TextBlock Text="Částka (Kč) *" Foreground="#475569" FontSize="13"/>
+        <TextBox x:Name="AmountBox" Watermark="0.00" HorizontalAlignment="Stretch"/>
+      </StackPanel>
+
+      <!-- Description -->
+      <StackPanel Spacing="4">
+        <TextBlock Text="Popis *" Foreground="#475569" FontSize="13"/>
+        <TextBox x:Name="DescriptionBox" Watermark="Stručný popis transakce" HorizontalAlignment="Stretch"/>
+      </StackPanel>
+
+      <!-- Category -->
+      <StackPanel Spacing="4">
+        <TextBlock Text="Kategorie" Foreground="#475569" FontSize="13"/>
+        <ComboBox x:Name="CategoryBox" HorizontalAlignment="Stretch"/>
+      </StackPanel>
+
+      <!-- Date -->
+      <StackPanel Spacing="4">
+        <TextBlock Text="Datum" Foreground="#475569" FontSize="13"/>
+        <DatePicker x:Name="DatePicker" HorizontalAlignment="Stretch"/>
+      </StackPanel>
+
+      <!-- Error message -->
+      <TextBlock x:Name="ErrorText" Foreground="#DC2626" IsVisible="False" TextWrapping="Wrap"/>
+
+      <!-- Buttons -->
+      <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
+        <Button Content="Zrušit" Click="OnCancel"/>
+        <Button Classes="primary" Content="✅ Uložit" Click="OnSave"/>
+      </StackPanel>
+
+    </StackPanel>
+  </Border>
+</Window>

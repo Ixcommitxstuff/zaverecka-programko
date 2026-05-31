@@ -1,0 +1,140 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:FinanceManager.Converters"
+        x:Class="FinanceManager.Views.MainWindow"
+        Title="Správce osobních financí"
+        Width="900" Height="660"
+        MinWidth="720" MinHeight="520"
+        Background="#F1F5F9"
+        WindowStartupLocation="CenterScreen">
+
+  <Window.Resources>
+    <conv:TransactionTypeConverter    x:Key="TypeConv"/>
+    <conv:TransactionTypeColorConverter x:Key="TypeColorConv"/>
+    <conv:AmountFormatter             x:Key="AmountFmt"/>
+  </Window.Resources>
+
+  <Grid RowDefinitions="Auto,*">
+
+    <!-- ── Top bar ── -->
+    <Border Grid.Row="0" Background="#1E293B" Padding="20,12">
+      <Grid ColumnDefinitions="*,Auto">
+        <StackPanel Orientation="Horizontal" Spacing="12">
+          <TextBlock Text="💰" FontSize="26" VerticalAlignment="Center"/>
+          <TextBlock Text="Správce osobních financí"
+                     FontSize="20" FontWeight="Bold"
+                     Foreground="White" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+          <Button Classes="primary" Content="➕ Přidat" Click="OnAddTransaction"/>
+          <Button Classes="primary" Content="📊 Statistiky" Click="OnOpenStatistics"/>
+          <Button Classes="primary" Content="🏷 Kategorie" Click="OnManageCategories"/>
+          <Button Classes="success" Content="📤 Export TXT" Click="OnExport"/>
+          <Button Classes="primary" Content="📥 Import TXT" Click="OnImport"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- ── Main content ── -->
+    <Grid Grid.Row="1" ColumnDefinitions="240,*" Margin="12">
+
+      <!-- Left: summary cards + filter -->
+      <StackPanel Grid.Column="0" Spacing="0">
+
+        <!-- Balance card -->
+        <Border Classes="card">
+          <StackPanel Spacing="6">
+            <TextBlock Text="Aktuální zůstatek" FontSize="12" Foreground="#64748B"/>
+            <TextBlock x:Name="BalanceText" FontSize="28" FontWeight="Bold"/>
+            <TextBlock x:Name="BalanceLabel" FontSize="12"/>
+          </StackPanel>
+        </Border>
+
+        <!-- Income / Expense mini cards -->
+        <Grid ColumnDefinitions="*,*">
+          <Border Classes="card" Grid.Column="0">
+            <StackPanel>
+              <TextBlock Text="Příjmy" FontSize="11" Foreground="#64748B"/>
+              <TextBlock x:Name="IncomeText" Classes="income" FontSize="16" FontWeight="Bold"/>
+            </StackPanel>
+          </Border>
+          <Border Classes="card" Grid.Column="1">
+            <StackPanel>
+              <TextBlock Text="Výdaje" FontSize="11" Foreground="#64748B"/>
+              <TextBlock x:Name="ExpenseText" Classes="expense" FontSize="16" FontWeight="Bold"/>
+            </StackPanel>
+          </Border>
+        </Grid>
+
+        <!-- Filter by category -->
+        <Border Classes="card" Margin="6,6,6,0">
+          <StackPanel Spacing="8">
+            <TextBlock Text="Filtr – kategorie" Classes="sectionHeader" FontSize="13"/>
+            <ComboBox x:Name="CategoryFilter" HorizontalAlignment="Stretch"
+                      SelectionChanged="OnCategoryFilterChanged"/>
+            <Button Content="Zrušit filtr" HorizontalAlignment="Stretch"
+                    Click="OnClearFilter"/>
+          </StackPanel>
+        </Border>
+
+        <!-- Filter by month -->
+        <Border Classes="card" Margin="6,0,6,0">
+          <StackPanel Spacing="8">
+            <TextBlock Text="Filtr – měsíc" Classes="sectionHeader" FontSize="13"/>
+            <ComboBox x:Name="MonthFilter" HorizontalAlignment="Stretch"
+                      SelectionChanged="OnMonthFilterChanged"/>
+            <Button Content="Zrušit filtr" HorizontalAlignment="Stretch"
+                    Click="OnClearMonthFilter"/>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      <!-- Right: transaction list -->
+      <Border Classes="card" Grid.Column="1">
+        <Grid RowDefinitions="Auto,*">
+          <TextBlock Grid.Row="0" Classes="sectionHeader" Text="Transakce"/>
+          <ListBox Grid.Row="1" x:Name="TransactionList"
+                   Background="Transparent"
+                   SelectionMode="Single">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Border Padding="8,6" CornerRadius="6" Margin="0,2">
+                  <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                    <!-- Type badge -->
+                    <Border Grid.Column="0" CornerRadius="4" Padding="6,2" Margin="0,0,10,0"
+                            Background="{Binding Type, Converter={StaticResource TypeColorConv}}">
+                      <TextBlock Text="{Binding Type, Converter={StaticResource TypeConv}}"
+                                 Foreground="White" FontSize="11" FontWeight="Bold"/>
+                    </Border>
+                    <!-- Description + category -->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                      <TextBlock Text="{Binding Description}" FontWeight="SemiBold" FontSize="14"/>
+                      <StackPanel Orientation="Horizontal" Spacing="6">
+                        <TextBlock Text="{Binding Category}" FontSize="11" Foreground="#64748B"/>
+                        <TextBlock Text="|" FontSize="11" Foreground="#CBD5E1"/>
+                        <TextBlock Text="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"
+                                   FontSize="11" Foreground="#64748B"/>
+                      </StackPanel>
+                    </StackPanel>
+                    <!-- Amount -->
+                    <TextBlock Grid.Column="2"
+                               Text="{Binding Amount, Converter={StaticResource AmountFmt}}"
+                               Foreground="{Binding Type, Converter={StaticResource TypeColorConv}}"
+                               FontWeight="Bold" FontSize="15"
+                               VerticalAlignment="Center" Margin="0,0,12,0"/>
+                    <!-- Delete button -->
+                    <Button Grid.Column="3" Content="🗑" VerticalAlignment="Center"
+                            Background="Transparent" Foreground="#94A3B8"
+                            Tag="{Binding Id}"
+                            Click="OnDeleteTransaction"/>
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>
