@@ -1,0 +1,18 @@
+﻿=================================================
+         SPRÁVCE OSOBNÍCH FINANCÍ – PŘEHLED      
+         Vytvořeno: 14.06.2026 19:22
+=================================================
+
+--- SOUHRN ---
+Celkové příjmy:    819 000,00 Kč
+Celkové výdaje:    401 000,00 Kč
+Zůstatek:          418 000,00 Kč  (V PLUSU ✓)
+
+--- ČERVEN 2026 ---
+  [14.06] cash                           + 14 000,00 Kč  [Ostatní]
+  [14.06] kino                           -  1 000,00 Kč  [Ostatní]
+  [14.06] prodej auta                    +800 000,00 Kč  [auta]
+  [14.06] kia ceed                       -400 000,00 Kč  [auta]
+  [14.06] lidl                           +  5 000,00 Kč  [jídlo]
+  Příjmy: 819 000,00 Kč | Výdaje: 401 000,00 Kč | Bilance: 418 000,00 Kč
+
